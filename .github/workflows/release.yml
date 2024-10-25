@@ -28,7 +28,7 @@ jobs:
       run: dotnet publish Text_Editor/Text_Editor.csproj --configuration Release --output .\release
 
     - name: Working directory
-      run: pwd
+      run: cd release
 
     - name: Create Release
       id: create_release
