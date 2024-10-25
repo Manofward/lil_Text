@@ -27,6 +27,9 @@ jobs:
     - name: Publish
       run: dotnet publish Text_Editor/Text_Editor.csproj --configuration Release --output ./release
 
+    - name: Working directory
+      run: pwd
+
     - name: List Release Directory
       run: ls -R ./release
 
