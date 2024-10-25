@@ -30,6 +30,9 @@ jobs:
     - name: Working directory
       run: cd release
 
+    - name: listing files
+      run: ls
+
     - name: Create Release
       id: create_release
       uses: softprops/action-gh-release@v1
