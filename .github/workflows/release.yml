@@ -30,18 +30,6 @@ jobs:
     - name: Working directory
       run: pwd
 
-  release:
-    runs-on: windows-latest
-    needs: build
-    if: success()
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: print Working directory
-      run: pwd
-
     - name: Create Release
       id: create_release
       uses: softprops/action-gh-release@v1
