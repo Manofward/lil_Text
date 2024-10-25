@@ -474,7 +474,7 @@
             // Status
             // 
             Status.Items.AddRange(new ToolStripItem[] { charCount, toolStripStatusLabel1, toolStripStatusLabel2, status_ZoomFactor });
-            Status.Location = new Point(0, 670);
+            Status.Location = new Point(0, 763);
             Status.Name = "Status";
             Status.Size = new Size(1373, 22);
             Status.TabIndex = 2;
@@ -514,7 +514,7 @@
             Document.Dock = DockStyle.Fill;
             Document.Location = new Point(0, 49);
             Document.Name = "Document";
-            Document.Size = new Size(1373, 621);
+            Document.Size = new Size(1373, 714);
             Document.TabIndex = 3;
             Document.Text = "";
             Document.LinkClicked += Document_LinkClicked;
@@ -585,13 +585,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1373, 692);
+            AutoSize = true;
+            ClientSize = new Size(1373, 785);
             Controls.Add(Document);
             Controls.Add(Status);
             Controls.Add(Tools);
             Controls.Add(mainMenu);
             MainMenuStrip = mainMenu;
-            MaximumSize = new Size(1389, 824);
+            MaximumSize = new Size(9999, 9999);
             MinimumSize = new Size(748, 473);
             Name = "TextEditor";
             Text = "TextEditor";
