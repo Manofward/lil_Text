@@ -5,6 +5,13 @@ on:
     tags:
       - 'v*.*.*'  # Triggers on version tags (e.g., v1.0.0)
 
+permissions:  # Global permissions
+  contents: write  # Needed to create a release
+  packages: write  # Needed if you're also publishing packages
+  issues: read     # Optional, only if your workflow interacts with issues
+  pull-requests: read # Optional, only if your workflow interacts with pull requests
+
+
 jobs:
   build:
     runs-on: windows-latest
