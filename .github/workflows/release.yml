@@ -35,6 +35,6 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ github.ref }}  # Uses the tag_name that triggered the workflow
-        files: .\releaseGit\*  # Specify the output directory for the binaries
+        files: .\release\*  # Specify the output directory for the binaries
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided by GitHub Actions
