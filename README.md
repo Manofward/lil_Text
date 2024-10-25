@@ -7,4 +7,4 @@ ToDos:
 * Bugfixing 
 * more features like Tables 
 
-This Project is only to learn about app creating.
+This Project is only to learn about app creating and should not be used for work.
