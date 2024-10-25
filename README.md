@@ -6,5 +6,6 @@ ToDos:
 * Pictures (for adding pictures)
 * Bugfixing 
 * more features like Tables 
+* changing the color of the Text
 
 This Project is only to learn about app creating and should not be used for work.
