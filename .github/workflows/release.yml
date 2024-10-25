@@ -25,13 +25,10 @@ jobs:
       run: dotnet build Text_Editor.sln --configuration Release
 
     - name: Publish
-      run: dotnet publish Text_Editor/Text_Editor.csproj --configuration Release --output ./release
+      run: dotnet publish Text_Editor/Text_Editor.csproj --configuration Release --output release/
 
     - name: Working directory
       run: pwd
-
-    - name: List Release Directory
-      run: ls -R ./release
 
   release:
     runs-on: ubuntu-latest
@@ -50,6 +47,6 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ github.ref }}  # Uses the tag_name that triggered the workflow
-        files: ./release/*   # Specify the output directory for the binaries
+        files: release/*   # Specify the output directory for the binaries
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided by GitHub Actions
