@@ -146,6 +146,31 @@ namespace Text_Editor
             Paste();
         }
 
+        // Adding Image Click
+
+        private void tb_AddImage_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openImage = new OpenFileDialog())
+            {
+                openImage.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+
+                if (openImage.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedFilePath = openImage.FileName;
+                    try
+                    {
+                        Image image = Image.FromFile(selectedFilePath);
+
+                        InsertImageIntoRichTextBox(image);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error Loading image: {ex.Message}");
+                    }
+                }
+            }
+        }
+
         // Writing Options like Bold italic etc.
 
         private void tb_Bold_Click(object sender, EventArgs e)
@@ -398,6 +423,18 @@ namespace Text_Editor
                 Status.BackColor = myDialog.Color;
                 Tools.BackColor = myDialog.Color;
             }
+        }
+
+        private void InsertImageIntoRichTextBox(Image image)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                string imgbase64 = Convert.ToBase64String(ms.ToArray());
+                string rtfImage = @"{\pict\pngblip\picw" + image.Width * 15 + @"\pich" + image.Height * 15 + @"\picwgoal" + image.Width * 15 + @"\pichgoal" + image.Height * 15 + @"\picw" + imgbase64 + "}";
+
+                Document.SelectedRtf = rtfImage;
+            } 
         }
 
         #endregion
