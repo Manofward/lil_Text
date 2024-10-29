@@ -221,7 +221,7 @@ namespace Text_Editor
 
         private void tb_UpperCase_Click(object sender, EventArgs e)
         {
-            Document.SelectedText = Document.Text.ToUpper();
+            Document.SelectedText = Document.SelectedText.ToUpper();
         }
 
         private void tb_LowerCase_Click(object sender, EventArgs e)
