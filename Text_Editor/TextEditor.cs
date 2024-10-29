@@ -150,82 +150,54 @@ namespace Text_Editor
 
         private void tb_Bold_Click(object sender, EventArgs e)
         {
-            Font bfont = new Font(Document.Font, FontStyle.Bold);
-            Font rfont = new Font(Document.Font, FontStyle.Regular);
-
-            if(Document.SelectedText.Length == 0)
+            if (Document.SelectedText.Length == 0)
             {
                 return;
             }
 
-            if (Document.SelectionFont.Bold)
-            {
-                Document.SelectionFont = rfont;
-            }
-            else
-            {
-                Document.SelectionFont = bfont;
-            }
+            Font currentFont = Document.SelectionFont;
+
+            FontStyle newFontStyle = currentFont.Style ^ FontStyle.Bold;
+            Document.SelectionFont = new Font(currentFont, newFontStyle);
         }
 
         private void tb_Italic_Click(object sender, EventArgs e)
         {
-            Font Ifont = new Font(Document.Font, FontStyle.Italic);
-            Font rfont = new Font(Document.Font, FontStyle.Regular);
-
             if (Document.SelectedText.Length == 0)
             {
                 return;
             }
 
-            if (Document.SelectionFont.Italic)
-            {
-                Document.SelectionFont = rfont;
-            }
-            else
-            {
-                Document.SelectionFont = Ifont;
-            }
+            Font currentFont = Document.SelectionFont;
+
+            FontStyle newFontStyle = currentFont.Style ^ FontStyle.Italic;
+            Document.SelectionFont= new Font(currentFont, newFontStyle);
         }
 
         private void tb_UnderLine_Click(object sender, EventArgs e)
         {
-            Font Ufont = new Font(Document.Font, FontStyle.Underline);
-            Font rfont = new Font(Document.Font, FontStyle.Regular);
-
             if (Document.SelectedText.Length == 0)
             {
                 return;
             }
 
-            if (Document.SelectionFont.Underline)
-            {
-                Document.SelectionFont = rfont;
-            }
-            else
-            {
-                Document.SelectionFont = Ufont;
-            }
+            Font currentFont = Document.SelectionFont;
+
+            FontStyle newFontStyle = currentFont.Style ^ FontStyle.Underline;
+            Document.SelectionFont = new Font(currentFont, newFontStyle);
         }
 
         private void tb_Strike_Click(object sender, EventArgs e)
         {
-            Font Sfont = new Font(Document.Font, FontStyle.Strikeout);
-            Font rfont = new Font(Document.Font, FontStyle.Regular);
-
             if (Document.SelectedText.Length == 0)
             {
                 return;
             }
 
-            if (Document.SelectionFont.Strikeout)
-            {
-                Document.SelectionFont = rfont;
-            }
-            else
-            {
-                Document.SelectionFont = Sfont;
-            }
+            Font currentFont = Document.SelectionFont;
+
+            FontStyle newFontStyle = currentFont.Style ^ FontStyle.Strikeout;
+            Document.SelectionFont = new Font(currentFont, newFontStyle);
         }
 
         // Align Left, right and middle functions
