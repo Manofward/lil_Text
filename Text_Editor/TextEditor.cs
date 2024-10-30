@@ -4,8 +4,10 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -144,6 +146,24 @@ namespace Text_Editor
         private void tb_Paste_Click(object sender, EventArgs e) 
         {
             Paste();
+        }
+
+        // Adding Image Click
+
+        private void tb_AddImage_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.png; *.bmp)|*.jpg; *.jpeg; *.gif; *.png; *.bmp";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    // Load the image from file, then copy the image to clipboard
+                    Clipboard.SetImage(Image.FromFile(ofd.FileName));
+
+                    // Paste the image into the RichTextBox
+                    Document.Paste();
+                }
+            }
         }
 
         // Writing Options like Bold italic etc.

@@ -57,6 +57,7 @@
             tb_Cut = new ToolStripButton();
             tb_Copy = new ToolStripButton();
             tb_Paste = new ToolStripButton();
+            tb_AddImage = new ToolStripButton();
             toolStripSeparator7 = new ToolStripSeparator();
             tb_Bold = new ToolStripButton();
             tb_Italic = new ToolStripButton();
@@ -246,7 +247,7 @@
             // 
             // Tools
             // 
-            Tools.Items.AddRange(new ToolStripItem[] { tb_New, tb_Open, tb_Save, toolStripSeparator6, tb_Cut, tb_Copy, tb_Paste, toolStripSeparator7, tb_Bold, tb_Italic, tb_UnderLine, tb_Strike, toolStripSeparator2, tb_AlignLeft, tb_AlignCenter, tb_AlignRight, toolStripSeparator5, tb_UpperCase, tb_LowerCase, toolStripSeparator8, tb_ZoomIn, tb_ZoomOut, toolStripSeparator9, tb_Font, tb_FontSize });
+            Tools.Items.AddRange(new ToolStripItem[] { tb_New, tb_Open, tb_Save, toolStripSeparator6, tb_Cut, tb_Copy, tb_Paste, tb_AddImage, toolStripSeparator7, tb_Bold, tb_Italic, tb_UnderLine, tb_Strike, toolStripSeparator2, tb_AlignLeft, tb_AlignCenter, tb_AlignRight, toolStripSeparator5, tb_UpperCase, tb_LowerCase, toolStripSeparator8, tb_ZoomIn, tb_ZoomOut, toolStripSeparator9, tb_Font, tb_FontSize });
             Tools.Location = new Point(0, 24);
             Tools.Name = "Tools";
             Tools.Size = new Size(1373, 25);
@@ -317,6 +318,17 @@
             tb_Paste.Size = new Size(23, 22);
             tb_Paste.Text = "&Paste";
             tb_Paste.Click += tb_Paste_Click;
+            // 
+            // tb_AddImage
+            // 
+            tb_AddImage.CheckOnClick = true;
+            tb_AddImage.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tb_AddImage.Image = (Image)resources.GetObject("tb_AddImage.Image");
+            tb_AddImage.ImageTransparentColor = Color.Magenta;
+            tb_AddImage.Name = "tb_AddImage";
+            tb_AddImage.Size = new Size(23, 22);
+            tb_AddImage.Text = "Add Image";
+            tb_AddImage.Click += tb_AddImage_Click;
             // 
             // toolStripSeparator7
             // 
@@ -680,5 +692,6 @@
         private System.Windows.Forms.Timer timer;
         private OpenFileDialog openWork;
         private SaveFileDialog saveWork;
+        private ToolStripButton tb_AddImage;
     }
 }
