@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
@@ -150,23 +151,15 @@ namespace Text_Editor
 
         private void tb_AddImage_Click(object sender, EventArgs e)
         {
-            using (OpenFileDialog openImage = new OpenFileDialog())
+            using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                openImage.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
-
-                if (openImage.ShowDialog() == DialogResult.OK)
+                ofd.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.png; *.bmp)|*.jpg; *.jpeg; *.gif; *.png; *.bmp";
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    string selectedFilePath = openImage.FileName;
-                    try
-                    {
-                        Image image = Image.FromFile(selectedFilePath);
-
-                        InsertImageIntoRichTextBox(image);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error Loading image: {ex.Message}");
-                    }
+                    // Load the image from file, then copy the image to clipboard
+                    Clipboard.SetImage(Image.FromFile(ofd.FileName));
+                    // Paste the image into the RichTextBox
+                    Document.Paste();
                 }
             }
         }
@@ -423,18 +416,6 @@ namespace Text_Editor
                 Status.BackColor = myDialog.Color;
                 Tools.BackColor = myDialog.Color;
             }
-        }
-
-        private void InsertImageIntoRichTextBox(Image image)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                string imgbase64 = Convert.ToBase64String(ms.ToArray());
-                string rtfImage = @"{\pict\pngblip\picw" + image.Width * 15 + @"\pich" + image.Height * 15 + @"\picwgoal" + image.Width * 15 + @"\pichgoal" + image.Height * 15 + @"\picw" + imgbase64 + "}";
-
-                Document.SelectedRtf = rtfImage;
-            } 
         }
 
         #endregion

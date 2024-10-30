@@ -92,7 +92,6 @@
             timer = new System.Windows.Forms.Timer(components);
             openWork = new OpenFileDialog();
             saveWork = new SaveFileDialog();
-            openImage = new OpenFileDialog();
             mainMenu.SuspendLayout();
             Tools.SuspendLayout();
             Status.SuspendLayout();
@@ -322,6 +321,7 @@
             // 
             // tb_AddImage
             // 
+            tb_AddImage.CheckOnClick = true;
             tb_AddImage.DisplayStyle = ToolStripItemDisplayStyle.Image;
             tb_AddImage.Image = (Image)resources.GetObject("tb_AddImage.Image");
             tb_AddImage.ImageTransparentColor = Color.Magenta;
@@ -693,6 +693,5 @@
         private OpenFileDialog openWork;
         private SaveFileDialog saveWork;
         private ToolStripButton tb_AddImage;
-        private OpenFileDialog openImage;
     }
 }
