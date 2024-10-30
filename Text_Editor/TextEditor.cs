@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Serialization;
@@ -158,6 +159,7 @@ namespace Text_Editor
                 {
                     // Load the image from file, then copy the image to clipboard
                     Clipboard.SetImage(Image.FromFile(ofd.FileName));
+
                     // Paste the image into the RichTextBox
                     Document.Paste();
                 }

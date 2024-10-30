@@ -327,7 +327,7 @@
             tb_AddImage.ImageTransparentColor = Color.Magenta;
             tb_AddImage.Name = "tb_AddImage";
             tb_AddImage.Size = new Size(23, 22);
-            tb_AddImage.Text = "toolStripButton1";
+            tb_AddImage.Text = "Add Image";
             tb_AddImage.Click += tb_AddImage_Click;
             // 
             // toolStripSeparator7
