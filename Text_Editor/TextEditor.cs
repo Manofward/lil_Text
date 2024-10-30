@@ -220,6 +220,13 @@ namespace Text_Editor
             Document.SelectionFont = new Font(currentFont, newFontStyle);
         }
 
+        // Color change Click
+
+        private void tb_TextColor_Click(object sender, EventArgs e)
+        {
+            Document.SelectionColor = Color.Red;
+        }
+
         // Align Left, right and middle functions
 
         private void tb_AlignLeft_Click(object sender, EventArgs e)

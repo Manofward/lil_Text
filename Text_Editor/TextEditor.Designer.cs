@@ -63,6 +63,7 @@
             tb_Italic = new ToolStripButton();
             tb_UnderLine = new ToolStripButton();
             tb_Strike = new ToolStripButton();
+            tb_TextColor = new ToolStripSplitButton();
             toolStripSeparator2 = new ToolStripSeparator();
             tb_AlignLeft = new ToolStripButton();
             tb_AlignCenter = new ToolStripButton();
@@ -247,7 +248,7 @@
             // 
             // Tools
             // 
-            Tools.Items.AddRange(new ToolStripItem[] { tb_New, tb_Open, tb_Save, toolStripSeparator6, tb_Cut, tb_Copy, tb_Paste, tb_AddImage, toolStripSeparator7, tb_Bold, tb_Italic, tb_UnderLine, tb_Strike, toolStripSeparator2, tb_AlignLeft, tb_AlignCenter, tb_AlignRight, toolStripSeparator5, tb_UpperCase, tb_LowerCase, toolStripSeparator8, tb_ZoomIn, tb_ZoomOut, toolStripSeparator9, tb_Font, tb_FontSize });
+            Tools.Items.AddRange(new ToolStripItem[] { tb_New, tb_Open, tb_Save, toolStripSeparator6, tb_Cut, tb_Copy, tb_Paste, tb_AddImage, toolStripSeparator7, tb_Bold, tb_Italic, tb_UnderLine, tb_Strike, tb_TextColor, toolStripSeparator2, tb_AlignLeft, tb_AlignCenter, tb_AlignRight, toolStripSeparator5, tb_UpperCase, tb_LowerCase, toolStripSeparator8, tb_ZoomIn, tb_ZoomOut, toolStripSeparator9, tb_Font, tb_FontSize });
             Tools.Location = new Point(0, 24);
             Tools.Name = "Tools";
             Tools.Size = new Size(1373, 25);
@@ -376,6 +377,18 @@
             tb_Strike.Size = new Size(23, 22);
             tb_Strike.Text = "S";
             tb_Strike.Click += tb_Strike_Click;
+            // 
+            // tb_TextColor
+            // 
+            tb_TextColor.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            tb_TextColor.ForeColor = Color.Red;
+            tb_TextColor.Image = (Image)resources.GetObject("tb_TextColor.Image");
+            tb_TextColor.ImageTransparentColor = Color.Magenta;
+            tb_TextColor.Name = "tb_TextColor";
+            tb_TextColor.Size = new Size(44, 22);
+            tb_TextColor.Text = "Abc";
+            tb_TextColor.ToolTipText = "Text Color";
+            tb_TextColor.ButtonClick += tb_TextColor_Click;
             // 
             // toolStripSeparator2
             // 
@@ -693,5 +706,6 @@
         private OpenFileDialog openWork;
         private SaveFileDialog saveWork;
         private ToolStripButton tb_AddImage;
+        private ToolStripSplitButton tb_TextColor;
     }
 }
