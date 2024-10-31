@@ -389,6 +389,7 @@
             tb_TextColor.Text = "Abc";
             tb_TextColor.ToolTipText = "Text Color";
             tb_TextColor.ButtonClick += tb_TextColor_Click;
+            tb_TextColor.DropDownOpening += tb_TextColor_DropDownOpening;
             // 
             // toolStripSeparator2
             // 
