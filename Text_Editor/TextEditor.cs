@@ -143,7 +143,7 @@ namespace Text_Editor
             Copy();
         }
 
-        private void tb_Paste_Click(object sender, EventArgs e) 
+        private void tb_Paste_Click(object sender, EventArgs e)
         {
             Paste();
         }
@@ -166,7 +166,7 @@ namespace Text_Editor
             }
         }
 
-        // Writing Options like Bold italic etc.
+        #region toolbar Text Options
 
         private void tb_Bold_Click(object sender, EventArgs e)
         {
@@ -191,7 +191,7 @@ namespace Text_Editor
             Font currentFont = Document.SelectionFont;
 
             FontStyle newFontStyle = currentFont.Style ^ FontStyle.Italic;
-            Document.SelectionFont= new Font(currentFont, newFontStyle);
+            Document.SelectionFont = new Font(currentFont, newFontStyle);
         }
 
         private void tb_UnderLine_Click(object sender, EventArgs e)
@@ -220,8 +220,30 @@ namespace Text_Editor
             Document.SelectionFont = new Font(currentFont, newFontStyle);
         }
 
-        // Align Left, right and middle functions
+        // Color change Click
 
+        private void tb_TextColor_Click(object sender, EventArgs e)
+        {
+            if (Document.SelectionColor != Color.Black)
+            {
+                Document.SelectionColor = Color.Black;
+            }
+            else
+            {
+                Document.SelectionColor = tb_TextColor.ForeColor;
+            }
+        }
+
+        private void tb_TextColor_DropDownOpening(object sender, EventArgs e)
+        {
+            colorChange();
+        }
+
+        #endregion
+
+        #region tb_Aligning Text
+
+        // Align Left, right and middle functions
         private void tb_AlignLeft_Click(object sender, EventArgs e)
         {
             Document.SelectionAlignment = HorizontalAlignment.Left;
@@ -237,19 +259,63 @@ namespace Text_Editor
             Document.SelectionAlignment = HorizontalAlignment.Right;
         }
 
+        #endregion
+
+        #region tb_Upper Text
         // upper Case and lower Case Click Functions
 
         private void tb_UpperCase_Click(object sender, EventArgs e)
         {
-            Document.SelectedText = Document.SelectedText.ToUpper();
+            if (Document.SelectedText.Length == 0)
+            {
+                return;
+            }
+
+            // Store the original selection start and length
+            int selectionStart = Document.SelectionStart;
+            int selectionLength = Document.SelectionLength;
+
+            // Loop through the selected text
+            for (int i = selectionStart; i < selectionStart + selectionLength; i++)
+            {
+                // Get the character at the current position
+                char character = Document.Text[i];
+                // Convert it to uppercase
+                char upperChar = char.ToUpper(character);
+
+                // Preserve the character formatting
+                Document.Select(i, 1); // Select the character
+                Document.SelectedText = upperChar.ToString(); // Replace it with uppercase character
+            }
+
+            // Restore original selection
+            Document.Select(selectionStart, selectionLength);
         }
 
         private void tb_LowerCase_Click(object sender, EventArgs e)
         {
-            Document.SelectedText = Document.SelectedText.ToLower();
-        }
+            if (Document.SelectedText.Length == 0)
+            {
+                return;
+            }
 
-        //Zoom clicks 
+            int selectionStart = Document.SelectionStart;
+            int selectionLength = Document.SelectionLength;
+
+            for (int i = selectionStart; i < selectionStart + selectionLength; i++)
+            {
+                char character = Document.Text[i];
+                char lowerChar = char.ToLower(character);
+
+                Document.Select(i, 1);
+                Document.SelectedText = lowerChar.ToString();
+            }
+
+            Document.Select(selectionStart, selectionLength);
+        }
+        #endregion
+
+        #region toolbar Zoom
 
         private void tb_ZoomIn_Click(object sender, EventArgs e)
         {
@@ -275,7 +341,9 @@ namespace Text_Editor
             }
         }
 
-        // Font Size and Fonts
+        #endregion
+
+        #region toolbar Fonts
 
         private void tb_Font_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -296,6 +364,7 @@ namespace Text_Editor
         {
             Document.SelectionFont = new Font(tb_FontSize.SelectedItem.ToString(), int.Parse(tb_FontSize.SelectedItem.ToString()), Document.SelectionFont.Style);
         }
+        #endregion
 
         #endregion
 
@@ -420,6 +489,17 @@ namespace Text_Editor
             }
         }
 
+        void colorChange()
+        {
+            ColorDialog myDialog = new ColorDialog();
+
+            if (myDialog.ShowDialog() == DialogResult.OK)
+            {
+                Document.SelectionColor = myDialog.Color;
+                tb_TextColor.ForeColor = myDialog.Color;
+            }
+        }
+
         #endregion
 
         #endregion
@@ -445,6 +525,5 @@ namespace Text_Editor
                 tb_Font.Items.Add(fonts.Families[i].Name);
             }
         }
-
     }
 }
