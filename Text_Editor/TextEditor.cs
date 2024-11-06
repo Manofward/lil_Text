@@ -261,18 +261,59 @@ namespace Text_Editor
 
         #endregion
 
-
+        #region tb_Upper Text
         // upper Case and lower Case Click Functions
 
         private void tb_UpperCase_Click(object sender, EventArgs e)
         {
-            Document.SelectedText = Document.SelectedText.ToUpper();
+            if (Document.SelectedText.Length == 0)
+            {
+                return;
+            }
+
+            // Store the original selection start and length
+            int selectionStart = Document.SelectionStart;
+            int selectionLength = Document.SelectionLength;
+
+            // Loop through the selected text
+            for (int i = selectionStart; i < selectionStart + selectionLength; i++)
+            {
+                // Get the character at the current position
+                char character = Document.Text[i];
+                // Convert it to uppercase
+                char upperChar = char.ToUpper(character);
+
+                // Preserve the character formatting
+                Document.Select(i, 1); // Select the character
+                Document.SelectedText = upperChar.ToString(); // Replace it with uppercase character
+            }
+
+            // Restore original selection
+            Document.Select(selectionStart, selectionLength);
         }
 
         private void tb_LowerCase_Click(object sender, EventArgs e)
         {
-            Document.SelectedText = Document.SelectedText.ToLower();
+            if (Document.SelectedText.Length == 0)
+            {
+                return;
+            }
+
+            int selectionStart = Document.SelectionStart;
+            int selectionLength = Document.SelectionLength;
+
+            for (int i = selectionStart; i < selectionStart + selectionLength; i++)
+            {
+                char character = Document.Text[i];
+                char lowerChar = char.ToLower(character);
+
+                Document.Select(i, 1);
+                Document.SelectedText = lowerChar.ToString();
+            }
+
+            Document.Select(selectionStart, selectionLength);
         }
+        #endregion
 
         #region toolbar Zoom
 
