@@ -9,3 +9,7 @@ ToDos:
 * changing the color of the Text
 
 This Project is only to learn about app creating and should not be used for work.
+
+### Standing things:
+#### Adding Tables:
+1. right now it doesnt look very Table like it has to be changed
