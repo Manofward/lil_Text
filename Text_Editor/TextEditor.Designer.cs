@@ -77,6 +77,10 @@
             toolStripSeparator9 = new ToolStripSeparator();
             tb_Font = new ToolStripComboBox();
             tb_FontSize = new ToolStripComboBox();
+            toolStripSeparator11 = new ToolStripSeparator();
+            tb_AddTable = new ToolStripButton();
+            tb_AddColumn = new ToolStripButton();
+            tb_DeleteColumn = new ToolStripButton();
             Status = new StatusStrip();
             charCount = new ToolStripStatusLabel();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
@@ -101,10 +105,11 @@
             // 
             // mainMenu
             // 
+            mainMenu.ImageScalingSize = new Size(20, 20);
             mainMenu.Items.AddRange(new ToolStripItem[] { mM_File, mM_Edit, mM_Tools });
             mainMenu.Location = new Point(0, 0);
             mainMenu.Name = "mainMenu";
-            mainMenu.Size = new Size(1373, 24);
+            mainMenu.Size = new Size(1209, 24);
             mainMenu.TabIndex = 0;
             mainMenu.Text = "menuStrip1";
             // 
@@ -236,7 +241,7 @@
             // 
             mM_Tools.DropDownItems.AddRange(new ToolStripItem[] { tools_Customisation });
             mM_Tools.Name = "mM_Tools";
-            mM_Tools.Size = new Size(46, 20);
+            mM_Tools.Size = new Size(47, 20);
             mM_Tools.Text = "&Tools";
             // 
             // tools_Customisation
@@ -248,10 +253,11 @@
             // 
             // Tools
             // 
-            Tools.Items.AddRange(new ToolStripItem[] { tb_New, tb_Open, tb_Save, toolStripSeparator6, tb_Cut, tb_Copy, tb_Paste, tb_AddImage, toolStripSeparator7, tb_Bold, tb_Italic, tb_UnderLine, tb_Strike, tb_TextColor, toolStripSeparator2, tb_AlignLeft, tb_AlignCenter, tb_AlignRight, toolStripSeparator5, tb_UpperCase, tb_LowerCase, toolStripSeparator8, tb_ZoomIn, tb_ZoomOut, toolStripSeparator9, tb_Font, tb_FontSize });
+            Tools.ImageScalingSize = new Size(20, 20);
+            Tools.Items.AddRange(new ToolStripItem[] { tb_New, tb_Open, tb_Save, toolStripSeparator6, tb_Cut, tb_Copy, tb_Paste, tb_AddImage, toolStripSeparator7, tb_Bold, tb_Italic, tb_UnderLine, tb_Strike, tb_TextColor, toolStripSeparator2, tb_AlignLeft, tb_AlignCenter, tb_AlignRight, toolStripSeparator5, tb_UpperCase, tb_LowerCase, toolStripSeparator8, tb_ZoomIn, tb_ZoomOut, toolStripSeparator9, tb_Font, tb_FontSize, toolStripSeparator11, tb_AddTable, tb_AddColumn, tb_DeleteColumn });
             Tools.Location = new Point(0, 24);
             Tools.Name = "Tools";
-            Tools.Size = new Size(1373, 25);
+            Tools.Size = new Size(1209, 27);
             Tools.TabIndex = 1;
             Tools.Text = "toolStrip1";
             // 
@@ -261,7 +267,7 @@
             tb_New.Image = (Image)resources.GetObject("tb_New.Image");
             tb_New.ImageTransparentColor = Color.Magenta;
             tb_New.Name = "tb_New";
-            tb_New.Size = new Size(23, 22);
+            tb_New.Size = new Size(24, 24);
             tb_New.Text = "&New";
             tb_New.Click += tb_New_Click;
             // 
@@ -271,7 +277,7 @@
             tb_Open.Image = (Image)resources.GetObject("tb_Open.Image");
             tb_Open.ImageTransparentColor = Color.Magenta;
             tb_Open.Name = "tb_Open";
-            tb_Open.Size = new Size(23, 22);
+            tb_Open.Size = new Size(24, 24);
             tb_Open.Text = "&Open";
             tb_Open.Click += tb_Open_Click;
             // 
@@ -281,14 +287,14 @@
             tb_Save.Image = (Image)resources.GetObject("tb_Save.Image");
             tb_Save.ImageTransparentColor = Color.Magenta;
             tb_Save.Name = "tb_Save";
-            tb_Save.Size = new Size(23, 22);
+            tb_Save.Size = new Size(24, 24);
             tb_Save.Text = "&Save";
             tb_Save.Click += tb_Save_Click;
             // 
             // toolStripSeparator6
             // 
             toolStripSeparator6.Name = "toolStripSeparator6";
-            toolStripSeparator6.Size = new Size(6, 25);
+            toolStripSeparator6.Size = new Size(6, 27);
             // 
             // tb_Cut
             // 
@@ -296,7 +302,7 @@
             tb_Cut.Image = (Image)resources.GetObject("tb_Cut.Image");
             tb_Cut.ImageTransparentColor = Color.Magenta;
             tb_Cut.Name = "tb_Cut";
-            tb_Cut.Size = new Size(23, 22);
+            tb_Cut.Size = new Size(24, 24);
             tb_Cut.Text = "C&ut";
             tb_Cut.Click += tb_Cut_Click;
             // 
@@ -306,7 +312,7 @@
             tb_Copy.Image = (Image)resources.GetObject("tb_Copy.Image");
             tb_Copy.ImageTransparentColor = Color.Magenta;
             tb_Copy.Name = "tb_Copy";
-            tb_Copy.Size = new Size(23, 22);
+            tb_Copy.Size = new Size(24, 24);
             tb_Copy.Text = "&Copy";
             tb_Copy.Click += tb_Copy_Click;
             // 
@@ -316,7 +322,7 @@
             tb_Paste.Image = (Image)resources.GetObject("tb_Paste.Image");
             tb_Paste.ImageTransparentColor = Color.Magenta;
             tb_Paste.Name = "tb_Paste";
-            tb_Paste.Size = new Size(23, 22);
+            tb_Paste.Size = new Size(24, 24);
             tb_Paste.Text = "&Paste";
             tb_Paste.Click += tb_Paste_Click;
             // 
@@ -327,14 +333,14 @@
             tb_AddImage.Image = (Image)resources.GetObject("tb_AddImage.Image");
             tb_AddImage.ImageTransparentColor = Color.Magenta;
             tb_AddImage.Name = "tb_AddImage";
-            tb_AddImage.Size = new Size(23, 22);
+            tb_AddImage.Size = new Size(24, 24);
             tb_AddImage.Text = "Add Image";
             tb_AddImage.Click += tb_AddImage_Click;
             // 
             // toolStripSeparator7
             // 
             toolStripSeparator7.Name = "toolStripSeparator7";
-            toolStripSeparator7.Size = new Size(6, 25);
+            toolStripSeparator7.Size = new Size(6, 27);
             // 
             // tb_Bold
             // 
@@ -342,7 +348,7 @@
             tb_Bold.Image = (Image)resources.GetObject("tb_Bold.Image");
             tb_Bold.ImageTransparentColor = Color.Magenta;
             tb_Bold.Name = "tb_Bold";
-            tb_Bold.Size = new Size(23, 22);
+            tb_Bold.Size = new Size(23, 24);
             tb_Bold.Text = "B";
             tb_Bold.Click += tb_Bold_Click;
             // 
@@ -352,7 +358,7 @@
             tb_Italic.Image = (Image)resources.GetObject("tb_Italic.Image");
             tb_Italic.ImageTransparentColor = Color.Magenta;
             tb_Italic.Name = "tb_Italic";
-            tb_Italic.Size = new Size(23, 22);
+            tb_Italic.Size = new Size(23, 24);
             tb_Italic.Text = "/";
             tb_Italic.Click += tb_Italic_Click;
             // 
@@ -363,7 +369,7 @@
             tb_UnderLine.Image = (Image)resources.GetObject("tb_UnderLine.Image");
             tb_UnderLine.ImageTransparentColor = Color.Magenta;
             tb_UnderLine.Name = "tb_UnderLine";
-            tb_UnderLine.Size = new Size(23, 22);
+            tb_UnderLine.Size = new Size(23, 24);
             tb_UnderLine.Text = "U";
             tb_UnderLine.Click += tb_UnderLine_Click;
             // 
@@ -374,7 +380,7 @@
             tb_Strike.Image = (Image)resources.GetObject("tb_Strike.Image");
             tb_Strike.ImageTransparentColor = Color.Magenta;
             tb_Strike.Name = "tb_Strike";
-            tb_Strike.Size = new Size(23, 22);
+            tb_Strike.Size = new Size(23, 24);
             tb_Strike.Text = "S";
             tb_Strike.Click += tb_Strike_Click;
             // 
@@ -385,7 +391,7 @@
             tb_TextColor.Image = (Image)resources.GetObject("tb_TextColor.Image");
             tb_TextColor.ImageTransparentColor = Color.Magenta;
             tb_TextColor.Name = "tb_TextColor";
-            tb_TextColor.Size = new Size(44, 22);
+            tb_TextColor.Size = new Size(44, 24);
             tb_TextColor.Text = "Abc";
             tb_TextColor.ToolTipText = "Text Color";
             tb_TextColor.ButtonClick += tb_TextColor_Click;
@@ -394,7 +400,7 @@
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 25);
+            toolStripSeparator2.Size = new Size(6, 27);
             // 
             // tb_AlignLeft
             // 
@@ -402,7 +408,7 @@
             tb_AlignLeft.Image = (Image)resources.GetObject("tb_AlignLeft.Image");
             tb_AlignLeft.ImageTransparentColor = Color.Magenta;
             tb_AlignLeft.Name = "tb_AlignLeft";
-            tb_AlignLeft.Size = new Size(23, 22);
+            tb_AlignLeft.Size = new Size(23, 24);
             tb_AlignLeft.Text = "L";
             tb_AlignLeft.Click += tb_AlignLeft_Click;
             // 
@@ -412,7 +418,7 @@
             tb_AlignCenter.Image = (Image)resources.GetObject("tb_AlignCenter.Image");
             tb_AlignCenter.ImageTransparentColor = Color.Magenta;
             tb_AlignCenter.Name = "tb_AlignCenter";
-            tb_AlignCenter.Size = new Size(23, 22);
+            tb_AlignCenter.Size = new Size(23, 24);
             tb_AlignCenter.Text = "C";
             tb_AlignCenter.Click += tb_AlignCenter_Click;
             // 
@@ -422,14 +428,14 @@
             tb_AlignRight.Image = (Image)resources.GetObject("tb_AlignRight.Image");
             tb_AlignRight.ImageTransparentColor = Color.Magenta;
             tb_AlignRight.Name = "tb_AlignRight";
-            tb_AlignRight.Size = new Size(23, 22);
+            tb_AlignRight.Size = new Size(23, 24);
             tb_AlignRight.Text = "R";
             tb_AlignRight.Click += tb_AlignRight_Click;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(6, 25);
+            toolStripSeparator5.Size = new Size(6, 27);
             // 
             // tb_UpperCase
             // 
@@ -437,7 +443,7 @@
             tb_UpperCase.Image = (Image)resources.GetObject("tb_UpperCase.Image");
             tb_UpperCase.ImageTransparentColor = Color.Magenta;
             tb_UpperCase.Name = "tb_UpperCase";
-            tb_UpperCase.Size = new Size(23, 22);
+            tb_UpperCase.Size = new Size(23, 24);
             tb_UpperCase.Text = "A";
             tb_UpperCase.Click += tb_UpperCase_Click;
             // 
@@ -447,14 +453,14 @@
             tb_LowerCase.Image = (Image)resources.GetObject("tb_LowerCase.Image");
             tb_LowerCase.ImageTransparentColor = Color.Magenta;
             tb_LowerCase.Name = "tb_LowerCase";
-            tb_LowerCase.Size = new Size(23, 22);
+            tb_LowerCase.Size = new Size(23, 24);
             tb_LowerCase.Text = "a";
             tb_LowerCase.Click += tb_LowerCase_Click;
             // 
             // toolStripSeparator8
             // 
             toolStripSeparator8.Name = "toolStripSeparator8";
-            toolStripSeparator8.Size = new Size(6, 25);
+            toolStripSeparator8.Size = new Size(6, 27);
             // 
             // tb_ZoomIn
             // 
@@ -462,7 +468,7 @@
             tb_ZoomIn.Image = (Image)resources.GetObject("tb_ZoomIn.Image");
             tb_ZoomIn.ImageTransparentColor = Color.Magenta;
             tb_ZoomIn.Name = "tb_ZoomIn";
-            tb_ZoomIn.Size = new Size(23, 22);
+            tb_ZoomIn.Size = new Size(23, 24);
             tb_ZoomIn.Text = "+";
             tb_ZoomIn.Click += tb_ZoomIn_Click;
             // 
@@ -472,21 +478,21 @@
             tb_ZoomOut.Image = (Image)resources.GetObject("tb_ZoomOut.Image");
             tb_ZoomOut.ImageTransparentColor = Color.Magenta;
             tb_ZoomOut.Name = "tb_ZoomOut";
-            tb_ZoomOut.Size = new Size(23, 22);
+            tb_ZoomOut.Size = new Size(23, 24);
             tb_ZoomOut.Text = "-";
             tb_ZoomOut.Click += tb_ZoomOut_Click;
             // 
             // toolStripSeparator9
             // 
             toolStripSeparator9.Name = "toolStripSeparator9";
-            toolStripSeparator9.Size = new Size(6, 25);
+            toolStripSeparator9.Size = new Size(6, 27);
             // 
             // tb_Font
             // 
             tb_Font.DropDownStyle = ComboBoxStyle.DropDownList;
             tb_Font.FlatStyle = FlatStyle.Standard;
             tb_Font.Name = "tb_Font";
-            tb_Font.Size = new Size(121, 25);
+            tb_Font.Size = new Size(121, 27);
             tb_Font.SelectedIndexChanged += tb_Font_SelectedIndexChanged;
             // 
             // tb_FontSize
@@ -494,15 +500,51 @@
             tb_FontSize.DropDownStyle = ComboBoxStyle.DropDownList;
             tb_FontSize.FlatStyle = FlatStyle.Standard;
             tb_FontSize.Name = "tb_FontSize";
-            tb_FontSize.Size = new Size(121, 25);
+            tb_FontSize.Size = new Size(121, 27);
             tb_FontSize.SelectedIndexChanged += tb_FontSize_SelectedIndexChanged;
+            // 
+            // toolStripSeparator11
+            // 
+            toolStripSeparator11.Name = "toolStripSeparator11";
+            toolStripSeparator11.Size = new Size(6, 27);
+            // 
+            // tb_AddTable
+            // 
+            tb_AddTable.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tb_AddTable.Image = (Image)resources.GetObject("tb_AddTable.Image");
+            tb_AddTable.ImageTransparentColor = Color.Magenta;
+            tb_AddTable.Name = "tb_AddTable";
+            tb_AddTable.Size = new Size(24, 24);
+            tb_AddTable.Text = "tb_AddTable";
+            tb_AddTable.Click += tb_AddTable_Click;
+            // 
+            // tb_AddColumn
+            // 
+            tb_AddColumn.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tb_AddColumn.Image = (Image)resources.GetObject("tb_AddColumn.Image");
+            tb_AddColumn.ImageTransparentColor = Color.Magenta;
+            tb_AddColumn.Name = "tb_AddColumn";
+            tb_AddColumn.Size = new Size(24, 24);
+            tb_AddColumn.Text = "tb_AddColumn";
+            tb_AddColumn.Click += tb_AddColumn_Click;
+            // 
+            // tb_DeleteColumn
+            // 
+            tb_DeleteColumn.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            tb_DeleteColumn.Image = (Image)resources.GetObject("tb_DeleteColumn.Image");
+            tb_DeleteColumn.ImageTransparentColor = Color.Magenta;
+            tb_DeleteColumn.Name = "tb_DeleteColumn";
+            tb_DeleteColumn.Size = new Size(24, 24);
+            tb_DeleteColumn.Text = "toolStripButton2";
+            tb_DeleteColumn.Click += tb_DeleteColumn_Click;
             // 
             // Status
             // 
+            Status.ImageScalingSize = new Size(20, 20);
             Status.Items.AddRange(new ToolStripItem[] { charCount, toolStripStatusLabel1, toolStripStatusLabel2, status_ZoomFactor });
-            Status.Location = new Point(0, 763);
+            Status.Location = new Point(0, 511);
             Status.Name = "Status";
-            Status.Size = new Size(1373, 22);
+            Status.Size = new Size(1209, 22);
             Status.TabIndex = 2;
             Status.Text = "statusStrip1";
             // 
@@ -523,7 +565,7 @@
             // 
             toolStripStatusLabel2.DisplayStyle = ToolStripItemDisplayStyle.None;
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new Size(1256, 17);
+            toolStripStatusLabel2.Size = new Size(1092, 17);
             toolStripStatusLabel2.Spring = true;
             toolStripStatusLabel2.Text = "toolStripStatusLabel2";
             // 
@@ -538,15 +580,17 @@
             // 
             Document.ContextMenuStrip = rcMenu;
             Document.Dock = DockStyle.Fill;
-            Document.Location = new Point(0, 49);
+            Document.Location = new Point(0, 51);
             Document.Name = "Document";
-            Document.Size = new Size(1373, 714);
+            Document.ScrollBars = RichTextBoxScrollBars.Vertical;
+            Document.Size = new Size(1209, 460);
             Document.TabIndex = 3;
             Document.Text = "";
             Document.LinkClicked += Document_LinkClicked;
             // 
             // rcMenu
             // 
+            rcMenu.ImageScalingSize = new Size(20, 20);
             rcMenu.Items.AddRange(new ToolStripItem[] { rc_Undo, rc_Redo, toolStripSeparator10, rc_Cut, rc_Copy, rc_Paste });
             rcMenu.Name = "contextMenuStrip1";
             rcMenu.Size = new Size(104, 120);
@@ -612,14 +656,14 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
-            ClientSize = new Size(1373, 785);
+            ClientSize = new Size(1209, 533);
             Controls.Add(Document);
             Controls.Add(Status);
             Controls.Add(Tools);
             Controls.Add(mainMenu);
             MainMenuStrip = mainMenu;
-            MaximumSize = new Size(9999, 9999);
-            MinimumSize = new Size(748, 473);
+            MaximumSize = new Size(1400, 800);
+            MinimumSize = new Size(748, 471);
             Name = "TextEditor";
             Text = "TextEditor";
             Load += TextEditor_Load;
@@ -708,5 +752,9 @@
         private SaveFileDialog saveWork;
         private ToolStripButton tb_AddImage;
         private ToolStripSplitButton tb_TextColor;
+        private ToolStripButton tb_AddTable;
+        private ToolStripSeparator toolStripSeparator11;
+        private ToolStripButton tb_AddColumn;
+        private ToolStripButton tb_DeleteColumn;
     }
 }

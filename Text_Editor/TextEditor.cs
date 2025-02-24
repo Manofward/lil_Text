@@ -18,6 +18,9 @@ namespace Text_Editor
 {
     public partial class TextEditor : Form
     {
+        private int tableCount = 0;
+        private int currentColumnCount = 0;
+
         public TextEditor()
         {
             InitializeComponent();
@@ -313,6 +316,7 @@ namespace Text_Editor
 
             Document.Select(selectionStart, selectionLength);
         }
+
         #endregion
 
         #region toolbar Zoom
@@ -364,6 +368,26 @@ namespace Text_Editor
         {
             Document.SelectionFont = new Font(tb_FontSize.SelectedItem.ToString(), int.Parse(tb_FontSize.SelectedItem.ToString()), Document.SelectionFont.Style);
         }
+
+        #endregion
+
+        #region Table
+
+        private void tb_AddTable_Click(object sender, EventArgs e)
+        {
+            AddTable();
+        }
+
+        private void tb_AddColumn_Click(object sender, EventArgs e)
+        {
+            AddColumnToLastTable();
+        }
+
+        private void tb_DeleteColumn_Click(object sender, EventArgs e)
+        {
+            DeleteColumnFromLastTable();
+        }
+
         #endregion
 
         #endregion
@@ -497,6 +521,96 @@ namespace Text_Editor
             {
                 Document.SelectionColor = myDialog.Color;
                 tb_TextColor.ForeColor = myDialog.Color;
+            }
+        }
+
+        #endregion
+
+        #region table
+
+        void AddTable()
+        {
+            tableCount++;
+            Document.AppendText($"Table {tableCount}:\n");
+
+            // Add headers
+            for (int i = 1; i <= currentColumnCount; i++)
+            {
+                Document.AppendText($"Column {i}\t");
+            }
+            Document.AppendText("\n");
+
+            // Add a separator
+            for (int i = 0; i < currentColumnCount; i++)
+            {
+                Document.AppendText("---------\t");
+            }
+            Document.AppendText("\n");
+
+            // Add an empty row
+            for (int i = 1; i <= currentColumnCount; i++)
+            {
+                Document.AppendText("\t"); // Empty cell
+            }
+            Document.AppendText("\n\n"); // Extra line for spacing
+        }
+
+        void AddColumnToLastTable()
+        {
+            if (tableCount > 0)
+            {
+                currentColumnCount++;
+                // Update the last table's header
+                Document.AppendText($"Column {currentColumnCount}\t");
+                Document.AppendText("\n");
+
+                // Add a new separator
+                for (int i = 0; i < currentColumnCount; i++)
+                {
+                    Document.AppendText("---------\t");
+                }
+                Document.AppendText("\n");
+
+                // Add an empty row
+                for (int i = 1; i <= currentColumnCount; i++)
+                {
+                    Document.AppendText("\t"); // Empty cell
+                }
+                Document.AppendText("\n\n"); // Extra line for spacing
+            }
+            else
+            {
+                MessageBox.Show("No table exists to add a column.");
+            }
+        }
+
+        void DeleteColumnFromLastTable()
+        {
+            if (tableCount > 0 && currentColumnCount > 0)
+            {
+                currentColumnCount--;
+
+                // Update the last table's header
+                Document.AppendText($"Column {currentColumnCount + 1} removed.\n");
+                Document.AppendText("\n");
+
+                // Add a new separator
+                for (int i = 0; i < currentColumnCount; i++)
+                {
+                    Document.AppendText("---------\t");
+                }
+                Document.AppendText("\n");
+
+                // Add an empty row
+                for (int i = 1; i <= currentColumnCount; i++)
+                {
+                    Document.AppendText("\t"); // Empty cell
+                }
+                Document.AppendText("\n\n"); // Extra line for spacing
+            }
+            else
+            {
+                MessageBox.Show("No columns to delete in the last table.");
             }
         }
 
