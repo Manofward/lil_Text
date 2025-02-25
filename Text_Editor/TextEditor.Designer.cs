@@ -77,10 +77,6 @@
             toolStripSeparator9 = new ToolStripSeparator();
             tb_Font = new ToolStripComboBox();
             tb_FontSize = new ToolStripComboBox();
-            toolStripSeparator11 = new ToolStripSeparator();
-            tb_AddTable = new ToolStripButton();
-            tb_AddColumn = new ToolStripButton();
-            tb_DeleteColumn = new ToolStripButton();
             Status = new StatusStrip();
             charCount = new ToolStripStatusLabel();
             toolStripStatusLabel1 = new ToolStripStatusLabel();
@@ -254,7 +250,7 @@
             // Tools
             // 
             Tools.ImageScalingSize = new Size(20, 20);
-            Tools.Items.AddRange(new ToolStripItem[] { tb_New, tb_Open, tb_Save, toolStripSeparator6, tb_Cut, tb_Copy, tb_Paste, tb_AddImage, toolStripSeparator7, tb_Bold, tb_Italic, tb_UnderLine, tb_Strike, tb_TextColor, toolStripSeparator2, tb_AlignLeft, tb_AlignCenter, tb_AlignRight, toolStripSeparator5, tb_UpperCase, tb_LowerCase, toolStripSeparator8, tb_ZoomIn, tb_ZoomOut, toolStripSeparator9, tb_Font, tb_FontSize, toolStripSeparator11, tb_AddTable, tb_AddColumn, tb_DeleteColumn });
+            Tools.Items.AddRange(new ToolStripItem[] { tb_New, tb_Open, tb_Save, toolStripSeparator6, tb_Cut, tb_Copy, tb_Paste, tb_AddImage, toolStripSeparator7, tb_Bold, tb_Italic, tb_UnderLine, tb_Strike, tb_TextColor, toolStripSeparator2, tb_AlignLeft, tb_AlignCenter, tb_AlignRight, toolStripSeparator5, tb_UpperCase, tb_LowerCase, toolStripSeparator8, tb_ZoomIn, tb_ZoomOut, toolStripSeparator9, tb_Font, tb_FontSize });
             Tools.Location = new Point(0, 24);
             Tools.Name = "Tools";
             Tools.Size = new Size(1209, 27);
@@ -503,41 +499,6 @@
             tb_FontSize.Size = new Size(121, 27);
             tb_FontSize.SelectedIndexChanged += tb_FontSize_SelectedIndexChanged;
             // 
-            // toolStripSeparator11
-            // 
-            toolStripSeparator11.Name = "toolStripSeparator11";
-            toolStripSeparator11.Size = new Size(6, 27);
-            // 
-            // tb_AddTable
-            // 
-            tb_AddTable.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tb_AddTable.Image = (Image)resources.GetObject("tb_AddTable.Image");
-            tb_AddTable.ImageTransparentColor = Color.Magenta;
-            tb_AddTable.Name = "tb_AddTable";
-            tb_AddTable.Size = new Size(24, 24);
-            tb_AddTable.Text = "tb_AddTable";
-            tb_AddTable.Click += tb_AddTable_Click;
-            // 
-            // tb_AddColumn
-            // 
-            tb_AddColumn.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tb_AddColumn.Image = (Image)resources.GetObject("tb_AddColumn.Image");
-            tb_AddColumn.ImageTransparentColor = Color.Magenta;
-            tb_AddColumn.Name = "tb_AddColumn";
-            tb_AddColumn.Size = new Size(24, 24);
-            tb_AddColumn.Text = "tb_AddColumn";
-            tb_AddColumn.Click += tb_AddColumn_Click;
-            // 
-            // tb_DeleteColumn
-            // 
-            tb_DeleteColumn.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            tb_DeleteColumn.Image = (Image)resources.GetObject("tb_DeleteColumn.Image");
-            tb_DeleteColumn.ImageTransparentColor = Color.Magenta;
-            tb_DeleteColumn.Name = "tb_DeleteColumn";
-            tb_DeleteColumn.Size = new Size(24, 24);
-            tb_DeleteColumn.Text = "toolStripButton2";
-            tb_DeleteColumn.Click += tb_DeleteColumn_Click;
-            // 
             // Status
             // 
             Status.ImageScalingSize = new Size(20, 20);
@@ -752,9 +713,5 @@
         private SaveFileDialog saveWork;
         private ToolStripButton tb_AddImage;
         private ToolStripSplitButton tb_TextColor;
-        private ToolStripButton tb_AddTable;
-        private ToolStripSeparator toolStripSeparator11;
-        private ToolStripButton tb_AddColumn;
-        private ToolStripButton tb_DeleteColumn;
     }
 }
