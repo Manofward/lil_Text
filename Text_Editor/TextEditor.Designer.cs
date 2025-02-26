@@ -541,6 +541,7 @@
             // 
             Document.ContextMenuStrip = rcMenu;
             Document.Dock = DockStyle.Fill;
+            Document.ForeColor = SystemColors.WindowText;
             Document.Location = new Point(0, 51);
             Document.Name = "Document";
             Document.ScrollBars = RichTextBoxScrollBars.Vertical;
