@@ -412,7 +412,32 @@ namespace Text_Editor
         {
             if (openWork.ShowDialog() == DialogResult.OK)
             {
-                Document.LoadFile(openWork.FileName, RichTextBoxStreamType.PlainText);
+                try
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(DocumentData));
+                    using (StreamReader reader = new StreamReader(openWork.FileName))
+                    {
+                        DocumentData documentData = (DocumentData)serializer.Deserialize(reader);
+                        Document.Clear();
+                        Document.AppendText(documentData.Text);
+
+                        // Restore text colors
+                        foreach (var colorData in documentData.TextColors)
+                        {
+                            Document.Select(colorData.Index, 1);
+                            Document.SelectionColor = Color.FromArgb(colorData.R, colorData.G, colorData.B);
+                        }
+
+                        // Restore images (if any)
+                        // Note: You need to implement a way to track images in the RichTextBox
+                        // This is a placeholder for image loading logic
+                        // Document.Paste(Image.FromFile(imagePath));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -422,7 +447,35 @@ namespace Text_Editor
             {
                 try
                 {
-                    Document.SaveFile(saveWork.FileName, RichTextBoxStreamType.PlainText);
+                    DocumentData documentData = new DocumentData
+                    {
+                        Text = Document.Text
+                    };
+
+                    // Save text colors
+                    for (int i = 0; i < Document.Text.Length; i++)
+                    {
+                        Document.Select(i, 1);
+                        Color color = Document.SelectionColor;
+                        documentData.TextColors.Add(new TextColorData
+                        {
+                            Index = i,
+                            R = color.R,
+                            G = color.G,
+                            B = color.B
+                        });
+                    }
+
+                    // Save images (if any)
+                    // Note: You need to implement a way to track images in the RichTextBox
+                    // This is a placeholder for image saving logic
+                    // documentData.Images.Add(new ImageData { Index = imageIndex, ImagePath = imagePath });
+
+                    XmlSerializer serializer = new XmlSerializer(typeof(DocumentData));
+                    using (StreamWriter writer = new StreamWriter(saveWork.FileName))
+                    {
+                        serializer.Serialize(writer, documentData);
+                    }
                 }
                 catch (Exception ex)
                 {
