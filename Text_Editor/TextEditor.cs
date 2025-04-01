@@ -428,10 +428,18 @@ namespace Text_Editor
                             Document.SelectionColor = Color.FromArgb(colorData.R, colorData.G, colorData.B);
                         }
 
+                        // Restore Alignments
                         foreach (var alignmentData in documentData.Alignments)
                         {
                             Document.Select(Document.GetFirstCharIndexFromLine(alignmentData.LineIndex), Document.Lines[alignmentData.LineIndex].Length);
                             Document.SelectionAlignment = alignmentData.Alignment;
+                        }
+
+                        // Restore Fonts
+                        foreach (var fontData in documentData.Fonts)
+                        {
+                            Document.Select(Document.GetFirstCharIndexFromLine(fontData.LineIndex), Document.Lines[fontData.LineIndex].Length);
+                            Document.SelectionFont = new Font(fontData.FontFamily, fontData.FontSize, fontData.FontStyle);
                         }
                     }
                 }
@@ -467,7 +475,7 @@ namespace Text_Editor
                         });
                     }
 
-                    // Save Alignment
+                    // Save Alignment and Fonts
                     string[] lines = Document.Lines;
                     for (int i = 0; i < lines.Length; i++)
                     {
@@ -476,6 +484,15 @@ namespace Text_Editor
                         {
                             LineIndex = i,
                             Alignment = Document.SelectionAlignment
+                        });
+
+                        Font currentFont = Document.SelectionFont;
+                        documentData.Fonts.Add(new FontData
+                        {
+                            LineIndex = i,
+                            FontFamily = currentFont.FontFamily.Name,
+                            FontSize = currentFont.Size,
+                            FontStyle = currentFont.Style
                         });
                     }
                     

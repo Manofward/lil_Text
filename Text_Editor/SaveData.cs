@@ -12,6 +12,7 @@ namespace Text_Editor
         public string Text { get; set; }
         public List<TextColorData> TextColors { get; set; } = new List<TextColorData>();
         public List<AlignmentData> Alignments { get; set; } = new List<AlignmentData>();
+        public List<FontData> Fonts { get; set; } = new List<FontData>();
     }
 
     [Serializable]
@@ -28,5 +29,14 @@ namespace Text_Editor
     {
         public int LineIndex { get; set; }
         public HorizontalAlignment Alignment { get; set; } // Store the alignment type
+    }
+
+    [Serializable]
+    public class FontData
+    {
+        public int LineIndex { get; set; }
+        public string FontFamily { get; set; }
+        public float FontSize { get; set; }
+        public FontStyle FontStyle { get; set; }
     }
 }
