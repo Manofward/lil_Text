@@ -428,10 +428,11 @@ namespace Text_Editor
                             Document.SelectionColor = Color.FromArgb(colorData.R, colorData.G, colorData.B);
                         }
 
-                        // Restore images (if any)
-                        // Note: You need to implement a way to track images in the RichTextBox
-                        // This is a placeholder for image loading logic
-                        // Document.Paste(Image.FromFile(imagePath));
+                        foreach (var alignmentData in documentData.Alignments)
+                        {
+                            Document.Select(Document.GetFirstCharIndexFromLine(alignmentData.LineIndex), Document.Lines[alignmentData.LineIndex].Length);
+                            Document.SelectionAlignment = alignmentData.Alignment;
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -466,11 +467,18 @@ namespace Text_Editor
                         });
                     }
 
-                    // Save images (if any)
-                    // Note: You need to implement a way to track images in the RichTextBox
-                    // This is a placeholder for image saving logic
-                    // documentData.Images.Add(new ImageData { Index = imageIndex, ImagePath = imagePath });
-
+                    // Save Alignment
+                    string[] lines = Document.Lines;
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        Document.Select(Document.GetFirstCharIndexFromLine(i), lines[i].Length);
+                        documentData.Alignments.Add(new AlignmentData
+                        {
+                            LineIndex = i,
+                            Alignment = Document.SelectionAlignment
+                        });
+                    }
+                    
                     XmlSerializer serializer = new XmlSerializer(typeof(DocumentData));
                     using (StreamWriter writer = new StreamWriter(saveWork.FileName))
                     {
@@ -560,7 +568,6 @@ namespace Text_Editor
         #endregion
 
         // FontSize function for changing the size of the font
-
         void FontSize()
         {
             for (int fntSize = 10; fntSize <= 75; fntSize++)
@@ -570,7 +577,6 @@ namespace Text_Editor
         }
 
         // Function to get the installed Fonts
-
         void InstalledFonts()
         {
             InstalledFontCollection fonts = new InstalledFontCollection();

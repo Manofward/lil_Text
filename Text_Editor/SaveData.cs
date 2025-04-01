@@ -11,7 +11,7 @@ namespace Text_Editor
     {
         public string Text { get; set; }
         public List<TextColorData> TextColors { get; set; } = new List<TextColorData>();
-        public List<ImageData> Images { get; set; } = new List<ImageData>();
+        public List<AlignmentData> Alignments { get; set; } = new List<AlignmentData>();
     }
 
     [Serializable]
@@ -24,9 +24,9 @@ namespace Text_Editor
     }
 
     [Serializable]
-    public class ImageData
+    public class AlignmentData
     {
-        public int Index { get; set; }
-        public string ImagePath { get; set; }
+        public int LineIndex { get; set; }
+        public HorizontalAlignment Alignment { get; set; } // Store the alignment type
     }
 }
