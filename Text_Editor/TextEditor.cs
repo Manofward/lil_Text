@@ -18,6 +18,8 @@ namespace Text_Editor
 {
     public partial class TextEditor : Form
     {
+        private string currentFilePath; // String to keep track of Image Paths
+
         public TextEditor()
         {
             InitializeComponent();
@@ -155,8 +157,11 @@ namespace Text_Editor
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.png; *.bmp)|*.jpg; *.jpeg; *.gif; *.png; *.bmp";
+                ofd.InitialDirectory = Path.GetDirectoryName(currentFilePath); // Set initial directory to current file path
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
+                    Image image = Image.FromFile(ofd.FileName);
+                    string imagePath = Path.Combine(Path.GetDirectoryName(currentFilePath), $"Image_{Guid.NewGuid()}.png");
                     // Load the image from file, then copy the image to clipboard
                     Clipboard.SetImage(Image.FromFile(ofd.FileName));
 
@@ -412,10 +417,12 @@ namespace Text_Editor
         {
             if (openWork.ShowDialog() == DialogResult.OK)
             {
+                currentFilePath = openWork.FileName;
+
                 try
                 {
                     XmlSerializer serializer = new XmlSerializer(typeof(DocumentData));
-                    using (StreamReader reader = new StreamReader(openWork.FileName))
+                    using (StreamReader reader = new StreamReader(currentFilePath))
                     {
                         DocumentData documentData = (DocumentData)serializer.Deserialize(reader);
                         Document.Clear();
@@ -441,6 +448,17 @@ namespace Text_Editor
                             Document.Select(Document.GetFirstCharIndexFromLine(fontData.LineIndex), Document.Lines[fontData.LineIndex].Length);
                             Document.SelectionFont = new Font(fontData.FontFamily, fontData.FontSize, fontData.FontStyle);
                         }
+
+                        // Restore Images
+                        foreach (var imagePath in documentData.ImagePaths)
+                        {
+                            if (File.Exists(imagePath))
+                            {
+                                Image image = Image.FromFile(imagePath);
+                                Clipboard.SetImage(image);
+                                Document.Paste();
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -452,60 +470,81 @@ namespace Text_Editor
 
         void Save()
         {
-            if (saveWork.ShowDialog() == DialogResult.OK)
+            if (string.IsNullOrEmpty(currentFilePath))
             {
-                try
+                if (saveWork.ShowDialog() == DialogResult.OK)
                 {
-                    DocumentData documentData = new DocumentData
-                    {
-                        Text = Document.Text
-                    };
+                    currentFilePath = saveWork.FileName;
+                }
+                else
+                {
+                    return;
+                }
+            }
 
-                    // Save text colors
-                    for (int i = 0; i < Document.Text.Length; i++)
-                    {
-                        Document.Select(i, 1);
-                        Color color = Document.SelectionColor;
-                        documentData.TextColors.Add(new TextColorData
-                        {
-                            Index = i,
-                            R = color.R,
-                            G = color.G,
-                            B = color.B
-                        });
-                    }
+            try
+            {
+                DocumentData documentData = new DocumentData
+                {
+                    Text = Document.Text
+                };
 
-                    // Save Alignment and Fonts
-                    string[] lines = Document.Lines;
-                    for (int i = 0; i < lines.Length; i++)
+                // Save text colors
+                for (int i = 0; i < Document.Text.Length; i++)
+                {
+                    Document.Select(i, 1);
+                    Color color = Document.SelectionColor;
+                    documentData.TextColors.Add(new TextColorData
                     {
-                        Document.Select(Document.GetFirstCharIndexFromLine(i), lines[i].Length);
-                        documentData.Alignments.Add(new AlignmentData
-                        {
-                            LineIndex = i,
-                            Alignment = Document.SelectionAlignment
-                        });
+                        Index = i,
+                        R = color.R,
+                        G = color.G,
+                        B = color.B
+                    });
+                }
 
-                        Font currentFont = Document.SelectionFont;
-                        documentData.Fonts.Add(new FontData
-                        {
-                            LineIndex = i,
-                            FontFamily = currentFont.FontFamily.Name,
-                            FontSize = currentFont.Size,
-                            FontStyle = currentFont.Style
-                        });
-                    }
-                    
-                    XmlSerializer serializer = new XmlSerializer(typeof(DocumentData));
-                    using (StreamWriter writer = new StreamWriter(saveWork.FileName))
+                // Save Alignment and Fonts
+                string[] lines = Document.Lines;
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    Document.Select(Document.GetFirstCharIndexFromLine(i), lines[i].Length);
+                    documentData.Alignments.Add(new AlignmentData
                     {
-                        serializer.Serialize(writer, documentData);
+                        LineIndex = i,
+                        Alignment = Document.SelectionAlignment
+                    });
+
+                    Font currentFont = Document.SelectionFont;
+                    documentData.Fonts.Add(new FontData
+                    {
+                        LineIndex = i,
+                        FontFamily = currentFont.FontFamily.Name,
+                        FontSize = currentFont.Size,
+                        FontStyle = currentFont.Style
+                    });
+                }
+
+                // Save Images from clipboard and other sources
+                if (Clipboard.ContainsImage())
+                {
+                    Image clipboardImage = Clipboard.GetImage();
+                    if (clipboardImage != null)
+                    {
+                        string imagePath = Path.Combine(Path.GetDirectoryName(currentFilePath), $"Image_{documentData.ImagePaths.Count + 1}.png");
+                        clipboardImage.Save(imagePath, ImageFormat.Png); // Save the image
+                        documentData.ImagePaths.Add(imagePath); // Add the image path to the document data
                     }
                 }
-                catch (Exception ex)
+
+                XmlSerializer serializer = new XmlSerializer(typeof(DocumentData));
+                using (StreamWriter writer = new StreamWriter(currentFilePath))
                 {
-                    MessageBox.Show(ex.Message);
+                    serializer.Serialize(writer, documentData);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

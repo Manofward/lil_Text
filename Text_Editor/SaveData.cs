@@ -13,6 +13,7 @@ namespace Text_Editor
         public List<TextColorData> TextColors { get; set; } = new List<TextColorData>();
         public List<AlignmentData> Alignments { get; set; } = new List<AlignmentData>();
         public List<FontData> Fonts { get; set; } = new List<FontData>();
+        public List<string> ImagePaths { get; set; } = new List<string>();
     }
 
     [Serializable]
